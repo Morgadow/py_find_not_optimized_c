@@ -195,25 +195,31 @@
       <rect>
        <x>25</x>
        <y>20</y>
-       <width>75</width>
+       <width>85</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
       <string>Select Folder</string>
      </property>
+     <property name="shortcut">
+      <string>Ctrl+D</string>
+     </property>
     </widget>
     <widget class="QPushButton" name="fileBtn">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>220</x>
        <y>20</y>
-       <width>75</width>
+       <width>85</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
       <string>Select File</string>
+     </property>
+     <property name="shortcut">
+      <string>Ctrl+F</string>
      </property>
     </widget>
     <widget class="QLabel" name="srcLbl">
@@ -245,6 +251,7 @@
      </property>
      <property name="font">
       <font>
+       <pointsize>8</pointsize>
        <italic>true</italic>
       </font>
      </property>
@@ -279,6 +286,9 @@
      </property>
      <property name="text">
       <string>Go</string>
+     </property>
+     <property name="shortcut">
+      <string>Ctrl+Return</string>
      </property>
     </widget>
     <widget class="QProgressBar" name="progressBar">

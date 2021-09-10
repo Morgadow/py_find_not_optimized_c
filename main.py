@@ -222,7 +222,7 @@ class FindNonOptimizedCFunctions:
             self._logger.info("Selected project folder: {}".format(folder))
             self.source_folder = folder
             self.source_file = None
-            self._update_lbl(self.__ui.srcEntryLbl, folder, 45, cut_end='front')
+            self._update_lbl(self.__ui.srcEntryLbl, folder, 42, cut_end='front')
             self._enable_start_btn()
 
     def _select_file(self):
@@ -236,7 +236,7 @@ class FindNonOptimizedCFunctions:
             self._logger.info("Selected start file: {}".format(file))
             self.source_file = file
             self.source_folder = None
-            self._update_lbl(self.__ui.srcEntryLbl, file, 45, cut_end='front')
+            self._update_lbl(self.__ui.srcEntryLbl, file, 42, cut_end='front')
             self._enable_start_btn()
 
     def _enable_start_btn(self):
@@ -267,7 +267,7 @@ class FindNonOptimizedCFunctions:
             lbl.setText(text)
         else:
             if cut_end == 'front':  # replace front part of string
-                lbl.setText('...' + str(text)[-max_length:])
+                lbl.setText('... ' + str(text)[-max_length:])
             if cut_end == "end":
                 lbl.setText(str(text)[:max_length] + ' ...')
 
@@ -295,7 +295,8 @@ class FindNonOptimizedCFunctions:
         :return: None
         :rtype: None
         """
-        self.__ui.progressBar.setValue(min(val, 100))
+        val = max(min(val, 100), 0)
+        self.__ui.progressBar.setValue(val)
 
     def run(self):
         """
@@ -307,7 +308,7 @@ class FindNonOptimizedCFunctions:
         """
         try:
             t = time.time()
-            self.__ui.progressBar.setValue(0)
+            self._update_progressbar(0)
             self.result_file = self._eval_export_file()
 
             # setup worker and thread environment
