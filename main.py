@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
 import time
-import logging
 import datetime
 
 from __init__ import __project_name__, __version__
@@ -11,7 +8,6 @@ from ui import ui
 from utils import *
 
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QObject, QThread, pyqtSignal
 
 
@@ -49,6 +45,8 @@ class Worker(QObject):
         :return: None
         :rtype: None
         """
+        t = time.time()
+
         # define what optimizations are accepted
         self.progress_info.emit("Analyzing inputs")
         if not len(acc_opts):
@@ -99,11 +97,17 @@ class Worker(QObject):
         self.progress_val.emit(98)
         export(found_funcs, self._result_file)
         self.progress_val.emit(100)
+        self.progress_info.emit(f"Finished after {round(time.time()-t, 3)} seconds")
 
 
 class FindNonOptimizedCFunctions:
     """
     main class holding gui and al functionality
+
+    Note:
+        This line must be added to ui.py __init__() to set correct window size:
+        "MainWindow.setFixedSize(330, 194)"
+        Also remove settings for minimum and maximum MainWindow size.
     """
 
     def __init__(self):
